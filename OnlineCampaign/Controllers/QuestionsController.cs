@@ -58,7 +58,7 @@ namespace OnlineCampaign.Controllers
                 }
                 catch (Exception ex)
                 {
-                    return StatusCode(StatusCodes.Status500InternalServerError, "No Data Found In Table");
+                    return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
                 }
         }
         [HttpGet]
@@ -165,7 +165,7 @@ namespace OnlineCampaign.Controllers
                     return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
                 }
 
-            };
+            }
 
         }
         [HttpDelete]
