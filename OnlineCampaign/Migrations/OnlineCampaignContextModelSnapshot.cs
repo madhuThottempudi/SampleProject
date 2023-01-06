@@ -2,17 +2,15 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using SampleProject;
+using OnlineCampaign;
 
-namespace SampleProject.Migrations
+namespace OnlineCampaign.Migrations
 {
-    [DbContext(typeof(SolutionContext))]
-    [Migration("20230103201028_solution")]
-    partial class solution
+    [DbContext(typeof(OnlineCampaignContext))]
+    partial class OnlineCampaignContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -20,25 +18,33 @@ namespace SampleProject.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.0");
 
-            modelBuilder.Entity("SampleProject.Models.Answer", b =>
+            modelBuilder.Entity("OnlineCampaign.Models.Answer", b =>
                 {
-                    b.Property<int>("QuestionId")
+                    b.Property<int>("AnswerId")
                         .HasColumnType("int");
 
                     b.Property<string>("AnswerValue")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("AnswerValue");
 
-                    b.Property<int>("OptionsId")
+                    b.Property<int>("OptionId")
                         .HasColumnType("int");
 
-                    b.HasKey("QuestionId");
+                    b.Property<int>("QuestionId")
+                        .HasColumnType("int");
+
+                    b.HasKey("AnswerId");
+
+                    b.HasIndex("OptionId");
+
+                    b.HasIndex("QuestionId");
 
                     b.ToTable("Answers");
                 });
 
-            modelBuilder.Entity("SampleProject.Models.Option", b =>
+            modelBuilder.Entity("OnlineCampaign.Models.Option", b =>
                 {
-                    b.Property<int>("QuestionId")
+                    b.Property<int>("OptionId")
                         .HasColumnType("int");
 
                     b.Property<string>("OptionName")
@@ -47,20 +53,20 @@ namespace SampleProject.Migrations
                     b.Property<string>("OptionValue")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("QuestionRefId")
+                    b.Property<int>("QuestionId")
                         .HasColumnType("int");
 
                     b.Property<string>("QuestionType")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("QuestionId");
+                    b.HasKey("OptionId");
 
-                    b.HasIndex("QuestionRefId");
+                    b.HasIndex("QuestionId");
 
                     b.ToTable("Options");
                 });
 
-            modelBuilder.Entity("SampleProject.Models.Question", b =>
+            modelBuilder.Entity("OnlineCampaign.Models.Question", b =>
                 {
                     b.Property<int>("Id")
                         .HasColumnType("int");
@@ -71,39 +77,36 @@ namespace SampleProject.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("QuestionRefId")
-                        .HasColumnType("int");
-
                     b.Property<int>("QuestionType")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("QuestionRefId");
-
                     b.ToTable("Questions");
                 });
 
-            modelBuilder.Entity("SampleProject.Models.Option", b =>
+            modelBuilder.Entity("OnlineCampaign.Models.Answer", b =>
                 {
-                    b.HasOne("SampleProject.Models.Answer", "Answer")
+                    b.HasOne("OnlineCampaign.Models.Option", null)
                         .WithMany()
-                        .HasForeignKey("QuestionRefId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("OptionId")
                         .IsRequired();
 
-                    b.Navigation("Answer");
+                    b.HasOne("OnlineCampaign.Models.Question", null)
+                        .WithMany()
+                        .HasForeignKey("QuestionId")
+                        .IsRequired();
                 });
 
-            modelBuilder.Entity("SampleProject.Models.Question", b =>
+            modelBuilder.Entity("OnlineCampaign.Models.Option", b =>
                 {
-                    b.HasOne("SampleProject.Models.Option", "Option")
+                    b.HasOne("OnlineCampaign.Models.Question", "Question")
                         .WithMany()
-                        .HasForeignKey("QuestionRefId")
+                        .HasForeignKey("QuestionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Option");
+                    b.Navigation("Question");
                 });
 #pragma warning restore 612, 618
         }

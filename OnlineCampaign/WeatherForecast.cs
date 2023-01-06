@@ -1,6 +1,6 @@
 using System;
 
-namespace SampleProject
+namespace OnlineCampaign
 {
     public class WeatherForecast
     {

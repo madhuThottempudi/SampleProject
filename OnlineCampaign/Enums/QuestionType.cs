@@ -1,4 +1,4 @@
-﻿namespace SampleProject.Enums
+﻿namespace OnlineCampaign.Enums
 {
     public enum QuestionType
     {
