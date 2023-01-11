@@ -1,11 +1,14 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using OnlineCampaign.Enums;
 using OnlineCampaign.Models;
+using OnlineCampaign.Models.Ddtos;
 using OnlineCampaign.Models.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace OnlineCampaign.Controllers
 {
@@ -68,10 +71,10 @@ namespace OnlineCampaign.Controllers
                     answerList = context.Answers.ToList()
                          .Select(x => new AnswerResponseDto()
                          {
-                            AnswerId = x.AnswerId,
-                            AnswerValue = x.AnswerValue,
-                            QuestionId = x.QuestionId,
-                            OptionId = x.OptionId
+                             AnswerId = x.AnswerId,
+                             AnswerValue = x.AnswerValue,
+                             QuestionId = x.QuestionId,
+                             OptionId = x.OptionId
 
                          }).ToList<AnswerResponseDto>();
 
@@ -178,6 +181,9 @@ namespace OnlineCampaign.Controllers
             }
 
         }
+
+       
+
 
     }
 }

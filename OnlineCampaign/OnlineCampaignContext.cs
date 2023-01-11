@@ -34,6 +34,7 @@ namespace OnlineCampaign
                 a.HasOne<Question>().WithMany().HasForeignKey(a => a.QuestionId).OnDelete(DeleteBehavior.ClientSetNull);
                 a.HasOne<Option>().WithMany().HasForeignKey(a => a.OptionId).OnDelete(DeleteBehavior.ClientSetNull);
 
+
             });
 
         }

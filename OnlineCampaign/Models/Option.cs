@@ -17,6 +17,5 @@ namespace OnlineCampaign.Models
 
         public Question Question { get; set; }
 
-       
     }
 }

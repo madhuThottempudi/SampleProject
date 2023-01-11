@@ -7,5 +7,6 @@
         public string QuestionType { get; set; }
         public string OptionName { get; set; }
         public string OptionValue { get; set; }
+
     }
 }
