@@ -331,6 +331,7 @@ namespace OnlineCampaign.Controllers
                     if (existingOption != null)
                     {
                         var updateRecord = context.Questions.FirstOrDefault(question => question.Id == existingOption.Question.Id);
+
                         if (updateRecord != null)
                         {
                             updateRecord.Name = input.Question.Name;

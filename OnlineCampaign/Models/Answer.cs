@@ -11,6 +11,8 @@ namespace OnlineCampaign.Models
         public string AnswerValue { get; set; }
         public int QuestionId { get; set; }
         public int OptionId { get; set; }
-   
+
+        
+
     }
 }
