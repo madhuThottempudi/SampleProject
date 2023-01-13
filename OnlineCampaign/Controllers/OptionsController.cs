@@ -321,7 +321,7 @@ namespace OnlineCampaign.Controllers
         [HttpPut]
         [Route("update/data")]
 
-        public async Task<ActionResult<Option>> UpdateData(int id, Option input)
+        public async Task<ActionResult<Option>> UpdateData(int id,[FromBody] Option input)
         {
             using (var context = new OnlineCampaignContext())
             {
@@ -330,24 +330,29 @@ namespace OnlineCampaign.Controllers
                     var existingOption = context.Options.Where(option => option.OptionId == id).FirstOrDefault();
                     if (existingOption != null)
                     {
-                        var updateRecord = context.Questions.FirstOrDefault(question => question.Id == existingOption.Question.Id);
+
+                        var updateRecord = context.Questions.FirstOrDefault(question => question.Id == existingOption.QuestionId);
 
                         if (updateRecord != null)
                         {
+
                             updateRecord.Name = input.Question.Name;
                             updateRecord.QuestionType = input.Question.QuestionType;
                             updateRecord.IsPublished = input.Question.IsPublished;
 
-                            var questionUpdate = context.Questions.Update(updateRecord);
+                                var questionRecord =  context.Questions.Update(updateRecord);
+                            context.SaveChanges();
+
 
                             existingOption.QuestionId = input.QuestionId;
                             existingOption.QuestionType = input.QuestionType;
                             existingOption.OptionName = input.OptionName;
                             existingOption.OptionValue = input.OptionValue;
 
-                            var optionUpdate = context.Options.Update(existingOption);
+                               var optionRecord = context.Options.Update(existingOption);
+                            context.SaveChanges();
 
-                            return StatusCode(StatusCodes.Status200OK);
+                            return StatusCode(StatusCodes.Status200OK,"Record Successfully Updated");
                         }
                         else
                         {

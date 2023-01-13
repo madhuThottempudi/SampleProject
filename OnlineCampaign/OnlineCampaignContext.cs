@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OnlineCampaign.Models;
-using System.Threading.Tasks;
+
 
 
 namespace OnlineCampaign 
@@ -53,7 +53,6 @@ namespace OnlineCampaign
             //});
 
         }
-
         public DbSet<Question> Questions { get; set; }
         public DbSet<Option> Options { get; set; }
         public DbSet<Answer> Answers { get; set; }

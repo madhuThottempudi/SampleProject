@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
@@ -16,6 +17,8 @@ namespace OnlineCampaign
 {
     public class Startup
     {
+
+     
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -32,11 +35,13 @@ namespace OnlineCampaign
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "OnlineCampaign", Version = "v1" });
             });
+          
         }
-
+      
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
